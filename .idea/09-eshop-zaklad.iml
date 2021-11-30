@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="WEB_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/eshop/app" isTestSource="false" packagePrefix="App\" />
+      <sourceFolder url="file://$MODULE_DIR$/spec" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/tests" isTestSource="true" />
+      <excludeFolder url="file://$MODULE_DIR$/eshop/vendor/tracy/tracy" />
+      <excludeFolder url="file://$MODULE_DIR$/eshop/vendor/dibi/dibi" />
+      <excludeFolder url="file://$MODULE_DIR$/eshop/vendor/facebook/graph-sdk" />
+      <excludeFolder url="file://$MODULE_DIR$/eshop/vendor/nette/routing" />
+      <excludeFolder url="file://$MODULE_DIR$/eshop/vendor/nette/forms" />
+      <excludeFolder url="file://$MODULE_DIR$/eshop/vendor/nette/finder" />
+      <excludeFolder url="file://$MODULE_DIR$/eshop/vendor/nette/mail" />
+      <excludeFolder url="file://$MODULE_DIR$/eshop/vendor/nette/di" />
+      <excludeFolder url="file://$MODULE_DIR$/eshop/vendor/latte/latte" />
+      <excludeFolder url="file://$MODULE_DIR$/eshop/vendor/nette/neon" />
+      <excludeFolder url="file://$MODULE_DIR$/eshop/vendor/vojir/leanmapper-mappers" />
+      <excludeFolder url="file://$MODULE_DIR$/eshop/vendor/nette/component-model" />
+      <excludeFolder url="file://$MODULE_DIR$/eshop/vendor/nette/bootstrap" />
+      <excludeFolder url="file://$MODULE_DIR$/eshop/vendor/nette/caching" />
+      <excludeFolder url="file://$MODULE_DIR$/eshop/vendor/nette/schema" />
+      <excludeFolder url="file://$MODULE_DIR$/eshop/vendor/nette/security" />
+      <excludeFolder url="file://$MODULE_DIR$/eshop/vendor/nette/php-generator" />
+      <excludeFolder url="file://$MODULE_DIR$/eshop/vendor/nette/utils" />
+      <excludeFolder url="file://$MODULE_DIR$/eshop/vendor/tharos/leanmapper" />
+      <excludeFolder url="file://$MODULE_DIR$/eshop/vendor/nette/application" />
+      <excludeFolder url="file://$MODULE_DIR$/eshop/vendor/nextras/forms-rendering" />
+      <excludeFolder url="file://$MODULE_DIR$/eshop/vendor/nette/http" />
+      <excludeFolder url="file://$MODULE_DIR$/eshop/vendor/nette/robot-loader" />
+      <excludeFolder url="file://$MODULE_DIR$/eshop/vendor/composer" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>

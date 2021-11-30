@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PhpIncludePathManager">
+    <include_path>
+      <path value="$PROJECT_DIR$/eshop/vendor/tracy/tracy" />
+      <path value="$PROJECT_DIR$/eshop/vendor/dibi/dibi" />
+      <path value="$PROJECT_DIR$/eshop/vendor/facebook/graph-sdk" />
+      <path value="$PROJECT_DIR$/eshop/vendor/nette/routing" />
+      <path value="$PROJECT_DIR$/eshop/vendor/nette/forms" />
+      <path value="$PROJECT_DIR$/eshop/vendor/nette/finder" />
+      <path value="$PROJECT_DIR$/eshop/vendor/nette/mail" />
+      <path value="$PROJECT_DIR$/eshop/vendor/nette/di" />
+      <path value="$PROJECT_DIR$/eshop/vendor/latte/latte" />
+      <path value="$PROJECT_DIR$/eshop/vendor/nette/neon" />
+      <path value="$PROJECT_DIR$/eshop/vendor/vojir/leanmapper-mappers" />
+      <path value="$PROJECT_DIR$/eshop/vendor/nette/component-model" />
+      <path value="$PROJECT_DIR$/eshop/vendor/nette/bootstrap" />
+      <path value="$PROJECT_DIR$/eshop/vendor/nette/caching" />
+      <path value="$PROJECT_DIR$/eshop/vendor/nette/schema" />
+      <path value="$PROJECT_DIR$/eshop/vendor/nette/security" />
+      <path value="$PROJECT_DIR$/eshop/vendor/nette/php-generator" />
+      <path value="$PROJECT_DIR$/eshop/vendor/nette/utils" />
+      <path value="$PROJECT_DIR$/eshop/vendor/tharos/leanmapper" />
+      <path value="$PROJECT_DIR$/eshop/vendor/nette/application" />
+      <path value="$PROJECT_DIR$/eshop/vendor/nextras/forms-rendering" />
+      <path value="$PROJECT_DIR$/eshop/vendor/nette/http" />
+      <path value="$PROJECT_DIR$/eshop/vendor/nette/robot-loader" />
+      <path value="$PROJECT_DIR$/eshop/vendor/composer" />
+    </include_path>
+  </component>
+  <component name="PhpProjectSharedConfiguration" php_language_level="7.2" />
+</project>
