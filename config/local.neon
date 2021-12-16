@@ -1,0 +1,20 @@
+parameters:
+    mailFrom:
+        email: 'blak05@vse.cz'
+        name: 'blak05 eshop'
+
+    database:
+        driver: mysqli
+        host: localhost
+        username:
+        password:
+        database:
+        charset: utf8mb4
+
+    facebook:
+        appId: ''
+        secret: ''
+
+php:
+	date.timezone: Europe/Prague
+	error_reporting: E_ALL &~E_USER_WARNING
