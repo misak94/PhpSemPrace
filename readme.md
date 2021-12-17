@@ -1,5 +1,5 @@
 
-TODO
-velikost u boty
-Zda komentujici produkt zakoupil
-Hodnoceni produktu
+TODO<br>
+velikost u boty<br>
+Zda komentujici produkt zakoupil<br>
+Hodnoceni produktu<br>
