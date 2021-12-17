@@ -6,14 +6,14 @@ parameters:
     database:
         driver: mysqli
         host: localhost
-        username: veim01
-        password: ahraiv7AeJee7eiChe
+        username: 
+        password: 
         database: veim01
         charset: utf8mb4
 
     facebook:
-        appId: '690090871959594'
-        secret: 'a3d96bf431589fc0cfe7632ab3cf8af3'
+        appId: ''
+        secret: ''
 
 php:
 	date.timezone: Europe/Prague
