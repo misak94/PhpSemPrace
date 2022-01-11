@@ -1,15 +1,33 @@
 {varType App\Model\Entities\Product $product}
 {block content}
 
-<h1 n:block="title">{$product->title}</h1>
 
-<p>
-    {$product->description}
-</p>
+{block script}
+ <link rel="stylesheet"  href="{$basePath}/styly/produkt.css">
+{/block script}
 
-<h2>Vložte nový příspěvek</h2>
-
-
+            <div class="container">
+            		<div class="card">
+            			<div class="container-fliud">
+            				<div class="wrapper row">
+            					<div class="preview col-md-6">
+            						<div class="preview-pic tab-content">
+            						  <div class="tab-pane active" id="pic-1"><img src="../img/products/{$product->url}.{$product->photoExtension}"></div>
+            						</div>
+            					</div>
+            					<div class="details col-md-6">
+            						<h3 class="product-title">{$product->title}</h3>
+            						<p class="product-description">{$product->description}</p>
+            						<h4 class="price">Cena: <span>{$product->price} Kč</span></h4>
+            						<div class="action">
+            							<button class="add-to-cart btn btn-default" type="button">Přidat do košíku</button>
+            						</div>
+            					</div>
+            				</div>
+            			</div>
+            		</div>
+            	</div>
+{if $logged}
 <form n:name=commentForm class=form>
 
         <div class="d-flex flex-column col-md-8">
@@ -20,58 +38,16 @@
 	        </div>
 	    </div>
 </form>
+{else}
+        <div class="d-flex flex-column col-md-8">
+
+            <div class="d-flex flex-row add-comment-section mt-4 mb-4">
+	            <h3>Komentář mohou přidávat pouze přihlášení uživatelé</h3>
+	        </div>
+	    </div>
+{/if}
 
 
-<style>
-body{
-    margin-top:20px;
-    background:#eee;
-}
-@media (min-width: 0) {
-    .g-mr-15 {
-        margin-right: 1.07143rem !important;
-    }
-}
-@media (min-width: 0){
-    .g-mt-3 {
-        margin-top: 0.21429rem !important;
-    }
-}
-
-.g-height-50 {
-    height: 50px;
-}
-
-.g-width-50 {
-    width: 50px !important;
-}
-
-@media (min-width: 0){
-    .g-pa-30 {
-        padding: 2.14286rem !important;
-    }
-}
-
-.g-bg-secondary {
-    background-color: #fafafa !important;
-}
-
-.u-shadow-v18 {
-    box-shadow: 0 5px 10px -6px rgba(0, 0, 0, 0.15);
-}
-
-.g-color-gray-dark-v4 {
-    color: #777 !important;
-}
-
-.g-font-size-12 {
-    font-size: 0.85714rem !important;
-}
-
-.media-comment {
-    margin-top:20px
-}
-</style>
 
             {foreach $product->comments as $comment}
             <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
@@ -115,6 +91,9 @@ body{
             </div>
             </div>
             {/foreach}
+
+
+
 
 
 

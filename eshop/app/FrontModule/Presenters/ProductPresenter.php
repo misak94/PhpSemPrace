@@ -54,6 +54,7 @@ class ProductPresenter extends BasePresenter{
 
     $this->template->product = $product;
     $this->productId= $product->productId;
+    $this->template->logged = $this->user->loggedIn;
   }
 
   public function render(string $user){
