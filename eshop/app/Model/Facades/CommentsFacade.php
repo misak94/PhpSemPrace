@@ -25,4 +25,9 @@ class CommentsFacade{
         $this->commentsRepository = $CommentsRepository;
     }
 
+    public function findComment(int $id){
+        return $this->commentsRepository->find($id);
+    }
+
+
 }

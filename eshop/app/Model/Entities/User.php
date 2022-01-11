@@ -13,6 +13,7 @@ use LeanMapper\Entity;
  * @property string $email
  * @property string|null $facebookId = null
  * @property string|null $password = null
+ * @property LikedBy[] $likedBy m:belongsToMany
  */
 class User extends Entity{
 

@@ -9,12 +9,14 @@ use LeanMapper\Entity;
 /**
  * Class Category
  * @package App\Model\Entities
- * @property int $commentId
- * @property int $postId
+ * @property int $commentsId
+ * @property Product $product m:hasOne
  * @property string $name
- * @property string $email
  * @property string $content
- * @property-read DateTime $created
+ * @property string $created
+ * @property int $likes
+ * @property int $dislikes
+ * @property LikedBy[] $likedBy m:belongsToMany
  */
 class Comments extends Entity
 {
