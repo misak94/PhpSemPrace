@@ -2,6 +2,7 @@
 
 namespace App\Model\Facades;
 
+use App\Model\Entities\Category;
 use App\Model\Entities\Product;
 use App\Model\Repositories\ProductRepository;
 use Nette\Http\FileUpload;
@@ -42,8 +43,17 @@ class ProductsFacade{
    * @param int $limit = null
    * @return Product[]
    */
-  public function findProducts(array $params=null,int $offset=null,int $limit=null):array {
+  /*public function findProducts(array $params=null,int $offset=null,int $limit=null):array {
     return $this->productRepository->findAllBy($params,$offset,$limit);
+  }*/
+    public function findProducts(Category $category=null,?bool  $available=null, ?int $offset=null, ?int $limit=null):array {
+        $categoryId = ($category ? $category->categoryId :null);
+        return $this->productRepository->findAllByCategoryAndAvailable($categoryId,$offset,$limit);
+    }
+
+  public function findProductCount(Category $category=null,?bool  $available=null):int{
+      $categoryId = ($category ? $category->categoryId :null);
+      return $this->productRepository->findCountByCategoryAndAvailable($categoryId,$available);
   }
 
   /**

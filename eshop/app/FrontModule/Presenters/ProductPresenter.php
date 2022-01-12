@@ -9,10 +9,12 @@ use App\Model\Entities\LikedBy;
 use App\Model\Facades\CommentsFacade;
 use App\Model\Facades\ProductsFacade;
 use App\Model\Facades\LikedByFacade;
+use App\Model\Facades\CategoriesFacade;
 use App\Model\Facades\UsersFacade;
+use mysql_xdevapi\Exception;
 use Nette\Application\BadRequestException;
 use Nette\Application\UI\Form;
-
+use Nette\Utils\Paginator;
 
 
 /**
@@ -31,11 +33,16 @@ class ProductPresenter extends BasePresenter{
   */private $userFacade;
   /** @var LikedByFacade $likedByFacade
   */private $likedByFacade;
+  /** @var CategoriesFacade $categoriesFacade
+  */private $categoriesFacade;
+
 
 
   /** @persistent */
   public $category;
   public $productId;
+  public $page = 1;
+
 
 
 
@@ -65,8 +72,36 @@ class ProductPresenter extends BasePresenter{
    * Akce pro vykreslení přehledu produktů
    */
   public function renderList():void {
+      $activeCategory = null;
+      if($this->category){
+        try {
+
+              $activeCategory = $this->categoriesFacade->getCategory((int)$this->category);
+        }catch(Exception $e){
+            $this->redirect('default',['category'=>null]);
+        }
+
+      }
     //TODO tady by mělo přibýt filtrování podle kategorie, stránkování atp.
-    $this->template->products = $this->productsFacade->findProducts(['order'=>'title']);
+
+    $this->template->activeCategory = $activeCategory;
+    //$this->template->products = $this->productsFacade->findProducts($activeCategory);
+    $this->template->categories = $this->categoriesFacade->findCategories();
+
+    //paginator
+    $paginator = new Paginator();
+    $paginator->setItemCount($this->productsFacade->findProductCount($activeCategory));
+    $paginator->setItemCount(30);
+
+    $currentPage = min($this->page,$paginator->pageCount);
+    $currentPage = max($currentPage,1);
+    if($currentPage !=$this->page){
+        $this->redirect('default',['page'=>$currentPage]);
+
+    }
+    $paginator->setPage($currentPage);
+    $this->template->products = $this->productsFacade->findProducts($activeCategory,null,$paginator->offset,$paginator->itemsPerPage);
+    $this->template->paginator = $paginator;
   }
  #region commentForm
     //Vytváření formuláře pro komentář
@@ -138,6 +173,10 @@ class ProductPresenter extends BasePresenter{
 
     public function injectLikedByFacade(LikedByFacade $likedByFacade):void{
         $this->likedByFacade = $likedByFacade;
+    }
+
+    public function injectCategoryFacade(CategoriesFacade $categoriesFacade){
+      $this->categoriesFacade = $categoriesFacade;
     }
 
   public function injectProductCartFormFactory(ProductCartFormFactory $productCartFormFactory):void {
