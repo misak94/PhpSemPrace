@@ -86,6 +86,7 @@
                                         <h4>{$product->title}</h4>
 
                                             <p class="item-price">{$product->price}Kč</p>
+                                            <p  {if $product->available<=0}class="text-danger"{/if}>{if $product->available<=0}Produkt není dostupný{/if}{if $product->available>0}Poček kusů: {$product->available}{/if}</p>
                                             <a href="#" class="btn btn-primary">Přidat do košíku</a>
                                     </div>
                                </div>

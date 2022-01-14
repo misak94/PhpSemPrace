@@ -13,7 +13,7 @@ use LeanMapper\Entity;
  * @property string $description
  * @property float $price
  * @property string $photoExtension = ''
- * @property bool $available = true
+ * @property int $available
  * @property Category|null $category m:hasOne
  * @property Comments[] $comments m:belongsToMany
  */
