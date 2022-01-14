@@ -3,6 +3,7 @@
 namespace App\FrontModule\Presenters;
 
 use App\Bootstrap;
+use App\FrontModule\Components\ProductCartForm\ProductCartForm;
 use App\FrontModule\Components\ProductCartForm\ProductCartFormFactory;
 use App\Model\Entities\Comments;
 use App\Model\Entities\LikedBy;
@@ -14,6 +15,7 @@ use App\Model\Facades\UsersFacade;
 use mysql_xdevapi\Exception;
 use Nette\Application\BadRequestException;
 use Nette\Application\UI\Form;
+use Nette\Application\UI\Multiplier;
 use Nette\Utils\Paginator;
 
 
@@ -140,6 +142,29 @@ class ProductPresenter extends BasePresenter{
         $this->commentsFacade->saveComment($comment);
         $this->flashMessage('Děkuji za komentář', 'success');
         $this->redirect('this');
+    }
+
+    protected function createComponentProductCartForm():Multiplier{
+        return new Multiplier(function($productId){
+            $form = $this->productCartFormFactory->create();
+            $form->setDefaults(['productId'=>$productId]);
+            $form->onSubmit[]=function (ProductCartForm  $form){
+
+                try {
+                    $product = $this->productsFacade->getProduct($form->values->productId);
+
+                }catch (Exception $e){
+                    $this->flashMessage('nelze pridat','error');
+                    $this->redirect('this');
+                }
+                $cart = $this->getComponent('cart');
+                $cart->addToCart($product,(int)$form->values->count,$form->values->size +35);
+
+                $this->redirect('this');
+            };
+
+            return $form;
+        });
     }
 
     /*public function handleLike(int $id){

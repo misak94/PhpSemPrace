@@ -19,9 +19,7 @@
             						<h3 class="product-title">{$product->title}</h3>
             						<p class="product-description">{$product->description}</p>
             						<h4 class="price">Cena: <span>{$product->price} Kč</span></h4>
-            						<div class="action">
-            							<button class="add-to-cart btn btn-default" type="button">Přidat do košíku</button>
-            						</div>
+                                    {control "productCartForm-$product->productId"}
             					</div>
             				</div>
             			</div>
@@ -91,6 +89,8 @@
             </div>
             </div>
             {/foreach}
+
+            {control cart:list}
 
 
 

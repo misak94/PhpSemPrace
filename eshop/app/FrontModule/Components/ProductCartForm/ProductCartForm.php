@@ -46,6 +46,7 @@ class ProductCartForm extends Form{
     $this->addHidden('productId');
     $this->addInteger('count','Počet kusů')
       ->addRule(Form::RANGE,'Chybný počet kusů.',[1,100]);
+    $this->addSelect('size','Velikost',['35','36','37','38','39','40','41','42','43','44','45']);
 
     $this->addSubmit('ok','přidat do košíku')
       ->onClick[]=function(SubmitButton $button){
