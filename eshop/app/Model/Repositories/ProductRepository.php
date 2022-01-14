@@ -31,6 +31,7 @@ class ProductRepository extends BaseRepository{
         $query->orderBy('title');
 
         return $this->createEntities($query->fetchAll($offset,$limit));
+       // return $this->createEntities($query->fetchAll(2,2));
     }
 
     public function findCountByCategoryAndAvailable(?int $categoryId=null, ?bool $available=null, ?int $offset=null, ?int $limit=null):int

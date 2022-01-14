@@ -48,7 +48,8 @@ class ProductsFacade{
   }*/
     public function findProducts(Category $category=null,?bool  $available=null, ?int $offset=null, ?int $limit=null):array {
         $categoryId = ($category ? $category->categoryId :null);
-        return $this->productRepository->findAllByCategoryAndAvailable($categoryId,$offset,$limit);
+        //return $this->productRepository->findAllByCategoryAndAvailable($categoryId,$offset,$limit);
+        return $this->productRepository->findAllByCategoryAndAvailable($categoryId,null,$offset,$limit);
     }
 
   public function findProductCount(Category $category=null,?bool  $available=null):int{

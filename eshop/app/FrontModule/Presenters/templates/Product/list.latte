@@ -12,6 +12,9 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
  <link rel="stylesheet"  href="{$basePath}/styly/NahledProduktu.css">
  <link rel="stylesheet"  href="{$basePath}/styly/sideMenu.css">
+ <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Open+Sans">
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
  <script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
  <script src="{$basePath}/script/sidebar-menu.js"></script>
 
@@ -72,37 +75,46 @@
 
                 <div class="flex-container wrap" style="flex-wrap:wrap" >
                 {foreach $products as $product}
+
                     <a href="{plink Product:show url=>$product->url, page=>1}" class="h4">
-                            <div class="height d-flex justify-content-center align-items-center" >
-                                <div class="card p-3" style="width:350px" style="height:250px" style="max-width:350px" style="max-height:250px">
-                                    <div class="d-flex justify-content-between align-items-center ">
-                                        <div class="mt-2">
-                                            <div class="mt-5">
-                                                <h5 class="text-uppercase mb-0" style="inline-size: 150px¨" style="overflow-wrap: break-word;">{$product->title}</h5>
-                                            </div>
-                                        </div>
-                                        <div class="image"> <img src="{$basePath}/img/products/{$product->url}.{$product->photoExtension}" width="200" height="200"> </div>
+                        <div class="thumb-wrapper">
+
+                                    <div class="img-box">
+                                        <img src="{$basePath}/img/products/{$product->url}.{$product->photoExtension}" width="200" height="200">
                                     </div>
-                                </div>
-                            </div>
+                                    <div class="thumb-content">
+                                        <h4>{$product->title}</h4>
+
+                                            <p class="item-price">{$product->price}Kč</p>
+                                            <a href="#" class="btn btn-primary">Přidat do košíku</a>
+                                    </div>
+                               </div>
                             </a>
+
+
                 {/foreach}
                 </div>
            </div>
         </div>
 
+
         {if $paginator->pageCount>1}
-                <ul class="paginator">
+                <div style="text-align:center" style="height:58px">
+                <ul  class="paginator" style="font-size:11px">
                     {for $i=1;$i<=$paginator->pageCount;$i++}
-                        <li class="page-item {if $paginator->page == $i}active{/if}">
+                        <li style="display:inline-block" class="page-item {if $paginator->page == $i}active{/if}">
                             <a class="page-link" href="{plink this page=>$i}">{$i}</a>
 
                         </li>
                     {/for}
                 </ul>
-
+                </div>
 
         {/if}
+
+
+
+
 
 
 

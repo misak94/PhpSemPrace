@@ -40,7 +40,9 @@ class ProductPresenter extends BasePresenter{
 
   /** @persistent */
   public $category;
+  /** @persistent */
   public $productId;
+  /** @persistent */
   public $page = 1;
 
 
@@ -78,7 +80,7 @@ class ProductPresenter extends BasePresenter{
 
               $activeCategory = $this->categoriesFacade->getCategory((int)$this->category);
         }catch(Exception $e){
-            $this->redirect('default',['category'=>null]);
+            $this->redirect('list',['category'=>null]);
         }
 
       }
@@ -91,15 +93,15 @@ class ProductPresenter extends BasePresenter{
     //paginator
     $paginator = new Paginator();
     $paginator->setItemCount($this->productsFacade->findProductCount($activeCategory));
-    $paginator->setItemCount(30);
+    $paginator->setItemsPerPage(8);
 
     $currentPage = min($this->page,$paginator->pageCount);
     $currentPage = max($currentPage,1);
     if($currentPage !=$this->page){
-        $this->redirect('default',['page'=>$currentPage]);
+        $this->redirect('list',['page'=>$currentPage]);
 
     }
-    $paginator->setPage($currentPage);
+    $paginator->setPage($this->page);
     $this->template->products = $this->productsFacade->findProducts($activeCategory,null,$paginator->offset,$paginator->itemsPerPage);
     $this->template->paginator = $paginator;
   }
