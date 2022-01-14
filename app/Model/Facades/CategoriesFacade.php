@@ -38,6 +38,8 @@ class CategoriesFacade{
     return $this->categoryRepository->findAllBy($params,$offset,$limit);
   }
 
+
+
   /**
    * Metoda pro zjištění počtu kategorií
    * @param array|null $params

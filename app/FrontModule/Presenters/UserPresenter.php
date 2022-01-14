@@ -99,7 +99,7 @@ class UserPresenter extends BasePresenter{
       #endregion návrat z Facebooku
     }else{
       #region přesměrování na přihlášení pomocí Facebooku
-        $backlink = $this->link('//User:facebookLogin',['callback'=>true,'backlink'=>null]);
+      $backlink = $this->link('//User:facebookLogin',['callback'=>true]);
       $facebookLoginLink = $this->facebookApi->getLoginUrl($backlink);
       $this->redirectUrl($facebookLoginLink);
       #endregion přesměrování na přihlášení pomocí Facebooku

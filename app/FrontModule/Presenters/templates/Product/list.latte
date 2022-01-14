@@ -1,12 +1,116 @@
 {varType App\Model\Entities\Product[] $products}
+{varType App\Model\Entities\Category[] $categories}
+{varType App\Model\Entities\Category[]|null $activeCategories}
+{varType Nette\Utils\Paginator $paginator}
+
+
+
+
 {block content}
+{block script}
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+ <link rel="stylesheet"  href="{$basePath}/styly/NahledProduktu.css">
+ <link rel="stylesheet"  href="{$basePath}/styly/sideMenu.css">
+ <script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
+ <script src="{$basePath}/script/sidebar-menu.js"></script>
 
-<h1 n:block="title">Nabízené produkty</h1>
+{/block script}
+<style>
+.container{
+    margin: 0px;
+}
 
-<section class="row" n:if="!empty($products)">
-    {foreach $products as $product}
-        <div class="col-md-6 col-lg-4 my-2 card">
-            <a href="{plink Product:show url=>$product->url}" class="h4">{$product->title}</a>
+                .flex-container {
+                  padding: 20;
+                  margin: 0;
+                  list-style: none;
+                  border: 1px solid silver;
+                  -ms-box-orient: horizontal;
+                  display: -webkit-box;
+                  display: -moz-box;
+                  display: -ms-flexbox;
+                  display: -moz-flex;
+                  display: -webkit-flex;
+                  display: flex;
+                }
+                .wrap    {
+                  -webkit-flex-wrap: wrap;
+                  flex-wrap: wrap;
+                }
+                #horizontal-list{
+                    list-style: none outside none; margin:0; padding: 0; text-align: center; }
+
+            </style>
+
+
+
+
+
+        <h1 n:block="title" style=" text-align: center">Nabízené produkty</h1>
+        <div   style="display:flex" style="margin: 0px">
+            <div style="margin-right:30px">
+
+                        <ul class="sidebar-menu">
+                            <li class="sidebar-header">Kategorie produktů</li>
+                            <li class="nav-item">
+                                <a class="nav-link {if !$activeCategory}active{/if}" href="{plink list category=>null,page=>1}">Všechny kategorie</a>
+                            </li>
+                            {foreach $categories as $category}
+                                <li class="nav-link {if $activeCategory && ($category->categoryId==$activeCategory->categoryId)}active{/if}">
+                                <a class="nav-link {if $activeCategory && ($category->categoryId==$activeCategory->categoryId)}active{/if}" href="{plink list category=>$category->categoryId,page=>1}">{$category->title}</a>
+                                </li>
+                            {/foreach}
+                        </ul>
+
+
+            </div>
+
+
+
+           <div>
+
+                <div class="flex-container wrap" style="flex-wrap:wrap" >
+                {foreach $products as $product}
+                    <a href="{plink Product:show url=>$product->url, page=>1}" class="h4">
+                            <div class="height d-flex justify-content-center align-items-center" >
+                                <div class="card p-3" style="width:350px" style="height:250px" style="max-width:350px" style="max-height:250px">
+                                    <div class="d-flex justify-content-between align-items-center ">
+                                        <div class="mt-2">
+                                            <div class="mt-5">
+                                                <h5 class="text-uppercase mb-0" style="inline-size: 150px¨" style="overflow-wrap: break-word;">{$product->title}</h5>
+                                            </div>
+                                        </div>
+                                        <div class="image"> <img src="{$basePath}/img/products/{$product->url}.{$product->photoExtension}" width="200" height="200"> </div>
+                                    </div>
+                                </div>
+                            </div>
+                            </a>
+                {/foreach}
+                </div>
+           </div>
         </div>
-    {/foreach}
-</section>
+
+        {if $paginator->pageCount>1}
+                <ul class="paginator">
+                    {for $i=1;$i<=$paginator->pageCount;$i++}
+                        <li class="page-item {if $paginator->page == $i}active{/if}">
+                            <a class="page-link" href="{plink this page=>$i}">{$i}</a>
+
+                        </li>
+                    {/for}
+                </ul>
+
+
+        {/if}
+
+
+
+
+
+
+
+
+
+
+

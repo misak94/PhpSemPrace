@@ -13,6 +13,8 @@ use Nextras\FormsRendering\Renderers\FormLayout;
 /**
  * Class ProductCartForm
  * @package App\FrontModule\Components\ProductCartForm
+ *
+ * @method onFinished()
  */
 class ProductCartForm extends Form{
 
@@ -28,7 +30,7 @@ class ProductCartForm extends Form{
    */
   public function __construct(Nette\ComponentModel\IContainer $parent = null, string $name = null){
     parent::__construct($parent, $name);
-    $this->setRenderer(new Bs4FormRenderer(FormLayout::VERTICAL));
+    $this->setRenderer(new Bs4FormRenderer(FormLayout::HORIZONTAL));
     $this->createSubcomponents();
   }
 
@@ -45,7 +47,11 @@ class ProductCartForm extends Form{
     $this->addInteger('count','Počet kusů')
       ->addRule(Form::RANGE,'Chybný počet kusů.',[1,100]);
 
-    $this->addSubmit('ok','přidat do košíku');
+    $this->addSubmit('ok','přidat do košíku')
+      ->onClick[]=function(SubmitButton $button){
+        //přidání zboží do košíku
+        //TODO
+      };
   }
 
 }
