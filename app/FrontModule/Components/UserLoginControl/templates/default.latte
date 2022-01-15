@@ -1,11 +1,21 @@
 {snippet}
   <div {if !empty($class)}class="{$class}"{/if}>
     {if $user->isLoggedIn()}
-      <strong>{$user->identity->name}</strong>
-      -
-      <a href="{link logout!}">odhlásit se</a>
-      <a href="#">{$user->identity->roles[1]}</a>
-      {if $user->identity->roles[1] == "admin"}<a class="dropdown-item" href="{plink :Admin:Dashboard:default}" class="btn btn-sm btn-outline-danger" ">ADMIN</a>{/if}
+
+      <ul class="navbar-nav ml-auto">
+		<li class="nav-item dropdown">
+			<a class="nav-link dropdown-toggle" href="#" id="adminNavbarUser" role="button" data-toggle="dropdown" aria-expanded="false">
+			  <strong>{$user->identity->name}</strong>
+			</a>
+			<div class="dropdown-menu" aria-labelledby="adminNavbarUser">
+			  {if $user->identity->roles[1] == "admin"}
+			    <a class="dropdown-item" href="{plink :Admin:Dashboard:default}" class="btn btn-sm btn-outline-danger {if !$user->isAllowed($dashboardpresnter,'default')}disabled{/if}">ADMIN</a>
+			  {/if}
+			  <a class="dropdown-item" href="{link logout!}">Odhlásit se</a>
+			</div>
+		</li>
+      </ul>
+
     {else}
       <a href="{link login!}">přihlásit se</a>
     {/if}

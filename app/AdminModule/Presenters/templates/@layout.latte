@@ -50,7 +50,7 @@
 						{$user->identity->name}
 					</a>
 					<div class="dropdown-menu" aria-labelledby="adminNavbarUser">
-						<a class="dropdown-item" href="{plink :Admin:Dashboard:default}" class="btn btn-sm btn-outline-danger {if !$user->isAllowed($dashboardpresnter,'default')}disabled{/if}">ADMIN</a>
+						<a class="dropdown-item" href="{plink :Front:Homepage:default}" class="btn btn-sm btn-outline-danger {if !$user->isAllowed($dashboardpresnter,'default')}disabled{/if}">Front</a>
 						<a class="dropdown-item" href="{plink :Front:User:logout}">Odhlásit se</a>
 					</div>
 				</li>
