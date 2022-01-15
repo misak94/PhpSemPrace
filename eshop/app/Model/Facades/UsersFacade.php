@@ -192,4 +192,28 @@ class UsersFacade{
     return $this->permissionRepository->findAll();
   }
   #endregion metody pro authorizator
+
+    /**
+     * Metoda pro vyhledání uživatelů
+     * @param array|null $params = null
+     * @param int $offset = null
+     * @param int $limit = null
+     * @return Users[]
+     */
+    public function findUsers(array $params=null,int $offset=null,int $limit=null):array {
+        return $this->userRepository->findAllBy($params,$offset,$limit);
+    }
+
+    /**
+     * Metoda pro smazání uživatele
+     * @param User $user
+     * @return bool
+     */
+    public function deleteUser(User $user):bool {
+        try{
+            return (bool)$this->userRepository->delete($user);
+        }catch (\Exception $e){
+            return false;
+        }
+    }
 }

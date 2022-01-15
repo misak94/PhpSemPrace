@@ -2,6 +2,7 @@
 
 namespace App\AdminModule\Components\ProductEditForm;
 
+use App\Model\Entities\Category;
 use App\Model\Entities\Product;
 use App\Model\Facades\CategoriesFacade;
 use App\Model\Facades\ProductsFacade;
@@ -84,34 +85,92 @@ class ProductEditForm extends Form{
     $this->addTextArea('description', 'Popis produktu')
       ->setRequired('Zadejte popis produktu.');
 
+      $this->addText('brand', 'Značka:')
+          ->setMaxLength(100)
+          ->setRequired('Zadejte značku produktu.');
+
+      $this->addText('color', 'Barva:')
+          ->setMaxLength(100)
+          ->setRequired('Zadejte barvu produktu.');
+
+      $this->addText('cut', 'Střih:')
+          ->setMaxLength(100)
+          ->setRequired('Zadejte střih produktu.');
+
+      $this->addText('model', 'Model:')
+          ->setMaxLength(100)
+          ->setRequired('Zadejte číslo modelu produktu.');
+
     $this->addText('price', 'Cena')
       ->setHtmlType('number')
       ->addRule(Form::NUMERIC)
       ->setRequired('Musíte zadat cenu produktu');//tady by mohly být další kontroly pro min, max atp.
 
-    $this->addCheckbox('available', 'Nabízeno ke koupi')
+    $this->addText('thirtyeight', 'Velikost: 38')
+      ->setHtmlType('number')
+      ->addRule(Form::NUMERIC)
+      ->setRequired('Musíte vědět kolik bot velikosti 38 máme!');//tady by mohly být další kontroly pro min, max atp.
+
+    $this->addText('thirtynine', 'Velikost: 39')
+      ->setHtmlType('number')
+      ->addRule(Form::NUMERIC)
+      ->setRequired('Musíte vědět kolik bot velikosti 39 máme!');//tady by mohly být další kontroly pro min, max atp.
+
+      $this->addText('forty', 'Velikost: 40')
+          ->setHtmlType('number')
+          ->addRule(Form::NUMERIC)
+          ->setRequired('Musíte vědět kolik bot velikosti 40 máme!');//tady by mohly být další kontroly pro min, max atp.
+
+      $this->addText('fortyone', 'Velikost: 41')
+          ->setHtmlType('number')
+          ->addRule(Form::NUMERIC)
+          ->setRequired('Musíte vědět kolik bot velikosti 41 máme!');//tady by mohly být další kontroly pro min, max atp.
+
+      $this->addText('fortytwo', 'Velikost: 42')
+          ->setHtmlType('number')
+          ->addRule(Form::NUMERIC)
+          ->setRequired('Musíte vědět kolik bot velikosti 42 máme!');//tady by mohly být další kontroly pro min, max atp.
+
+      $this->addText('fortythree', 'Velikost: 43')
+          ->setHtmlType('number')
+          ->addRule(Form::NUMERIC)
+          ->setRequired('Musíte vědět kolik bot velikosti 43 máme!');//tady by mohly být další kontroly pro min, max atp.
+
+      $this->addText('fortyfour', 'Velikost: 44')
+          ->setHtmlType('number')
+          ->addRule(Form::NUMERIC)
+          ->setRequired('Musíte vědět kolik bot velikosti 44 máme!');//tady by mohly být další kontroly pro min, max atp.
+
+      $this->addText('fortyfive', 'Velikost: 45')
+          ->setHtmlType('number')
+          ->addRule(Form::NUMERIC)
+          ->setRequired('Musíte vědět kolik bot velikosti 45 máme!');//tady by mohly být další kontroly pro min, max atp.
+
+
+      $this->addCheckbox('available', 'Zobrazit:')
       ->setDefaultValue(true);
 
     #region obrázek
-    $photoUpload=$this->addUpload('photo','Fotka produktu');
-    //pokud není zadané ID produktu, je nahrání fotky povinné
-    $photoUpload //vyžadování nahrání souboru, pokud není známé productId
+      $photoUpload=$this->addUpload('photo','Fotka produktu');
+      //pokud není zadané ID produktu, je nahrání fotky povinné
+      $photoUpload //vyžadování nahrání souboru, pokud není známé productId
       ->addConditionOn($productId, Form::EQUAL, '')
-        ->setRequired('Pro uložení nového produktu je nutné nahrát jeho fotku.');
+          ->setRequired('Pro uložení nového produktu je nutné nahrát jeho fotku.');
 
-    $photoUpload //limit pro velikost nahrávaného souboru
+      $photoUpload //limit pro velikost nahrávaného souboru
       ->addRule(Form::MAX_FILE_SIZE, 'Nahraný soubor je příliš velký', 1000000);
 
-    $photoUpload //kontrola typu nahraného souboru, pokud je nahraný
+      $photoUpload //kontrola typu nahraného souboru, pokud je nahraný
       ->addCondition(Form::FILLED)
-        ->addRule(function(Nette\Forms\Controls\UploadControl $photoUpload){
-          $uploadedFile = $photoUpload->value;
-          if ($uploadedFile instanceof Nette\Http\FileUpload){
-            $extension=strtolower($uploadedFile->getImageFileExtension());
-            return in_array($extension,['jpg','jpeg','png']);
-          }
-          return false;
-        },'Je nutné nahrát obrázek ve formátu JPEG či PNG.');
+          ->addRule(function(Nette\Forms\Controls\UploadControl $photoUpload){
+              $uploadedFile = $photoUpload->value;
+              if ($uploadedFile instanceof Nette\Http\FileUpload){
+                  $extension=strtolower($uploadedFile->getImageFileExtension());
+                  return in_array($extension,['jpg','jpeg','png']);
+              }
+              return false;
+          },'Je nutné nahrát obrázek ve formátu JPEG či PNG.');
+
     #endregion obrázek
 
     $this->addSubmit('ok','uložit')
@@ -127,8 +186,17 @@ class ProductEditForm extends Form{
         }else{
           $product=new Product();
         }
-        $product->assign($values,['title','url','description','available']);
+        $product->assign($values,['title','url','description','available','brand','color','cut','model']);
+        $product->category=$this->categoriesFacade->getCategory($values['categoryId']);
         $product->price=floatval($values['price']);
+        $product->thirtyeight=intval($values['thirtyeight']);
+        $product->thirtynine=intval($values['thirtynine']);
+        $product->forty=intval($values['forty']);
+        $product->fortyone=intval($values['fortyone']);
+        $product->fortytwo=intval($values['fortytwo']);
+        $product->fortythree=intval($values['fortythree']);
+        $product->fortyfour=intval($values['fortyfour']);
+        $product->fortyfive=intval($values['fortyfive']);
         $this->productsFacade->saveProduct($product);
         $this->setValues(['productId'=>$product->productId]);
 
@@ -164,7 +232,19 @@ class ProductEditForm extends Form{
         'title'=>$values->title,
         'url'=>$values->url,
         'description'=>$values->description,
-        'price'=>$values->price
+        'price'=>$values->price,
+          'brand'=>$values->brand,
+          'color'=>$values->color,
+          'cut'=>$values->cut,
+          'model'=>$values->model,
+          'thirtyeight'=>$values->thirtyeight,
+          'thirtynine'=>$values->thirtynine,
+          'forty'=>$values->forty,
+          'fortyone'=>$values->fortyone,
+          'fortytwo'=>$values->fortytwo,
+          'fortythree'=>$values->fortythree,
+          'fortyfour'=>$values->fortyfour,
+          'fortyfive'=>$values->fortyfive
       ];
     }
     parent::setDefaults($values, $erase);

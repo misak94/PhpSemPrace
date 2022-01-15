@@ -36,6 +36,16 @@
 				<li n:class="$presenter->isLinkCurrent('Category:*')?active, nav-item" n:if="$user->isAllowed('Admin:Category','default')">
 					<a class="nav-link" href="{plink Category:default}">Kategorie</a>
 				</li>
+				<li n:class="$presenter->isLinkCurrent('Comments:*')?active, nav-item" n:if="$user->isAllowed('Admin:Comments','default')">
+					<a class="nav-link" href="{plink Comments:default}">Komentáře</a>
+				</li>
+				<li n:class="$presenter->isLinkCurrent('Users:*')?active, nav-item" n:if="$user->isAllowed('Admin:Users','default')">
+					<a class="nav-link" href="{plink Users:default}">Uživatelé</a>
+				</li>
+				<li n:class="$presenter->isLinkCurrent('Users:*')?active, nav-item" n:if="$user->isAllowed('Admin:Users','default')">
+					<a class="nav-link" href="{plink :Front:Homepage:default}">Eshop</a>
+				</li>
+
 			</ul>
 
 			<ul class="navbar-nav ml-auto">
@@ -44,6 +54,7 @@
 						{$user->identity->name}
 					</a>
 					<div class="dropdown-menu" aria-labelledby="adminNavbarUser">
+						<a class="dropdown-item" href="{plink :Admin:Dashboard:default}" class="btn btn-sm btn-outline-danger {if !$user->isAllowed($dashboardpresnter,'default')}disabled{/if}">ADMIN</a>
 						<a class="dropdown-item" href="{plink :Front:User:logout}">Odhlásit se</a>
 					</div>
 				</li>

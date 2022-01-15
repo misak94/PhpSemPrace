@@ -77,8 +77,6 @@ class CategoryEditForm extends Form{
       };
   }
 
-
-
   /**
    * Metoda pro nastavení výchozích hodnot formuláře
    * @param Category|array|object $values

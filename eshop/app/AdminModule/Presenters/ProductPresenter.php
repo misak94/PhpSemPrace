@@ -20,7 +20,7 @@ class ProductPresenter extends BasePresenter{
    * Akce pro vykreslení seznamu produktů
    */
   public function renderDefault():void {
-    $this->template->products=$this->productsFacade->findProducts(['order'=>'title']);
+    $this->template->products=$this->productsFacade->findProducts(null, null, null,null );
   }
 
   /**
