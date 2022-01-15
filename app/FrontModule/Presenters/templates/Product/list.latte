@@ -10,13 +10,13 @@
 {block script}
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
- <link rel="stylesheet"  href="{$basePath}/styly/NahledProduktu.css">
+ <link rel="stylesheet"  href="{$basePath}/styly/nahledProduktu.css">
  <link rel="stylesheet"  href="{$basePath}/styly/sideMenu.css">
  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Open+Sans">
  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
  <script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
- <script src="{$basePath}/script/sidebar-menu.js"></script>
+ <script src="{$basePath}/www/script/sidebar-menu.js"></script>
 
 {/block script}
 <style>
@@ -80,7 +80,7 @@
                         <div class="thumb-wrapper">
 
                                     <div class="img-box">
-                                        <img src="{$basePath}/img/products/{$product->url}.{$product->photoExtension}" width="200" height="200">
+                                        <img src="{$basePath}/img/products/{$product->productId}.{$product->photoExtension}" width="200" height="200">
                                     </div>
                                     <div class="thumb-content">
                                         <h4>{$product->title}</h4>
