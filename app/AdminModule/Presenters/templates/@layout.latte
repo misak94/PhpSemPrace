@@ -39,6 +39,9 @@
 				<li n:class="$presenter->isLinkCurrent('Comments:*')?active, nav-item" n:if="$user->isAllowed('Admin:Comments','default')">
 					<a class="nav-link" href="{plink Comments:default}">Komentáře</a>
 				</li>
+				<li n:class="$presenter->isLinkCurrent('Users:*')?active, nav-item" n:if="$user->isAllowed('Admin:Users','default')">
+					<a class="nav-link" href="{plink Users:default}">Uživatelé</a>
+				</li>
 			</ul>
 
 			<ul class="navbar-nav ml-auto">

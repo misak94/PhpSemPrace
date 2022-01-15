@@ -17,4 +17,5 @@ use LeanMapper\Entity;
  */
 class User extends Entity{
 
+
 }
