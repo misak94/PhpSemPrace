@@ -44,6 +44,9 @@ services:
 	- App\Model\Facades\UsersFacade
 	- App\Model\Facades\LikedByFacade
 	- App\Model\Facades\CommentsFacade
+	- App\Model\Facades\CartFacade
+
+
 
 	- App\Model\Repositories\CategoryRepository
 	- App\Model\Repositories\ForgottenPasswordRepository
@@ -54,3 +57,8 @@ services:
 	- App\Model\Repositories\UserRepository
 	- App\Model\Repositories\LikedByRepository
 	- App\Model\Repositories\CommentsRepository
+	- App\Model\Repositories\CartRepository
+	- App\Model\Repositories\CartItemRepository	
+	
+
+		

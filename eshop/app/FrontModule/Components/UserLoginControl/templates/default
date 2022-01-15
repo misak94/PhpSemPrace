@@ -1,0 +1,13 @@
+{snippet}
+  <div {if !empty($class)}class="{$class}"{/if}>
+    {if $user->isLoggedIn()}
+      <strong>{$user->identity->name}</strong>
+      -
+      <a href="{link logout!}">odhlásit se</a>
+      <a href="#">{$user->identity->roles[1]}</a>
+      {if $user->identity->roles[1] == "admin"}<a class="dropdown-item" href="{plink :Admin:Dashboard:default}" class="btn btn-sm btn-outline-danger" ">ADMIN</a>{/if}
+    {else}
+      <a href="{link login!}">přihlásit se</a>
+    {/if}
+  </div>
+{/snippet}
