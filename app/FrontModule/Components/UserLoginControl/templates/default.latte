@@ -11,6 +11,8 @@
 			  {if $user->identity->roles[1] == "admin"}
 			    <a class="dropdown-item" href="{plink :Admin:Dashboard:default}" class="btn btn-sm btn-outline-danger {if !$user->isAllowed($dashboardpresnter,'default')}disabled{/if}">ADMIN</a>
 			  {/if}
+			  <a class="dropdown-item" href="#">Moje objednávky</a>
+			  <a class="dropdown-item" href="#">Moje komentáře</a>
 			  <a class="dropdown-item" href="{link logout!}">Odhlásit se</a>
 			</div>
 		</li>
