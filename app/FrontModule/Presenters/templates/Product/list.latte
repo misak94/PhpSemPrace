@@ -86,8 +86,9 @@
                                         <h4>{$product->title}</h4>
 
                                             <p class="item-price">{$product->price}Kč</p>
-                                            <p  {if $product->available<=0}class="text-danger"{/if}>{if $product->available<=0}Produkt není dostupný{/if}{if $product->available>0}Poček kusů: {$product->available}{/if}</p>
-                                            <a href="#" class="btn btn-primary">Přidat do košíku</a>
+                                            {var $pocetKusu = ($product->thirtyeight+$product->thirtynine+$product->forty+$product->fortyone+$product->fortytwo+$product->fortythree+$product->fortyfour+$product->fortyfive)}
+                                            <p  {if $pocetKusu<=0}class="text-danger"{/if}>{if $pocetKusu<=0}Produkt není dostupný{/if}{if $pocetKusu>0}Poček kusů: {$pocetKusu}{/if}</p>
+                                            {if $pocetKusu>0}<a href="{plink Product:show url=>$product->url, page=>1}" class="btn btn-primary">Přejít na detail</a>{/if}
                                     </div>
                                </div>
                             </a>
