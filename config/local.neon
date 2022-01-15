@@ -1,0 +1,20 @@
+parameters:
+    mailFrom:
+        email: 'veim01@vse.cz'
+        name: 'veim01 eshop'
+
+    database:
+        driver: mysqli
+        host: localhost
+        username: 
+        password: 
+        database: veim01
+        charset: utf8mb4
+
+    facebook:
+        appId: ''
+        secret: ''
+
+php:
+	date.timezone: Europe/Prague
+	error_reporting: E_ALL &~E_USER_WARNING
