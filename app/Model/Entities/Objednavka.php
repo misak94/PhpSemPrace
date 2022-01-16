@@ -15,6 +15,7 @@ use LeanMapper\Entity;
  * @property User $user m:hasOne
  * @property CartItem[] $cartItems m:belongsToMany
  * @property int $cena
+ * @property string|null $stav
  */
 
 class Objednavka extends Entity

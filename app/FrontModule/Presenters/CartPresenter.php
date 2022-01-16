@@ -76,6 +76,7 @@ class CartPresenter extends BasePresenter
         $objednavka->email = $values->email;
         $objednavka->objednavkaId=(int)$values->objednavkaId;
         $objednavka->zprava =$values->zprava;
+        $objednavka->stav = "přijato";
         $objednavka->user = $this->usersFacade->getUser($this->user->id);
         $objednavka->cena = (int)$this->cartFacade->getCartByUser($this->usersFacade->getUser($this->user->id))->getTotalPrice();
         $cart=$this->cartFacade->getCartByUser($this->usersFacade->getUser($this->user->id));
@@ -84,9 +85,11 @@ class CartPresenter extends BasePresenter
             $cartItem = $item;
             $cartItem->objednavka = $this->objednavkaFacade->getObjednavka((int)$values->objednavkaId);
             $this->cartFacade->saveCartItemId($cartItem);
+            $this->cartFacade->deleteCartItem($this->cartFacade->getCartItem($cartItem->cartItemId));
         }
         //$this->objednavkaFacade->saveObjednavka($objednavka);
-
+        $this->flashMessage('Objednávka byla odeslána, děkujeme!', 'info');
+        $this->redirect('Product:list');
 
     }
 

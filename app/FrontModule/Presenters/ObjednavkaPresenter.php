@@ -24,7 +24,7 @@ class ObjednavkaPresenter extends BasePresenter
     /**@var ObjednavkaFacade $objednavkaFacade */
     private $objednavkaFacade;
     public function renderList():void {
-        $this->template->objednavka = $this->objednavkaFacade->findObjednavkas();
+        $this->template->objednavka = $this->objednavkaFacade->findObjednavkas(['order'=>'created DESC']);
 
     }
 

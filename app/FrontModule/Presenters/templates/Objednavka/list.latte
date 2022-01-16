@@ -5,17 +5,20 @@
 <h1>Vaše objednávky</h1>
 <table class="table table-hover">
     <tr>
-        <th>číslo objednávky</th>
-        <th>cena</th>
+        <th>Číslo objednávky</th>
+        <th>Stav objednávky</th>
+        <th>Celková cena</th>
+        <th>Akce</th>
     </tr>
     {var $pocetmychobjednavek = 0}
     {foreach $objednavka as $objednavka}
         {if $user->identity->id == $objednavka->user->userId}
             <tr>
                 <td>{$objednavka->objednavkaId}</td>
-                <td>c</td>
+                <td>{$objednavka->stav}</td>
+                <td>{$objednavka->cena} Kč</td>
                 <td>
-                    <a href="{plink detail $objednavka->objednavkaId}" class="btn btn-sm btn-outline-danger" >podrobnosti</a>
+                    <a href="{plink detail $objednavka->objednavkaId}" class="btn btn-sm btn-outline-danger" >Zobrazit podrobnosti</a>
                 </td>
             </tr>
             {var $pocetmychobjednavek = $pocetmychobjednavek + 1}
