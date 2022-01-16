@@ -1,31 +1,41 @@
 {varType App\Model\Entities\Cart $cart}
 
-{if empty($cart->items)}
-    košík je prázdný
+<div n:snippet="list" data-naja-snippet-cache="off">
 
+    <h1>Váš košík</div>
+    {if empty($cart->items)}
+    Váš košík je zatím prázdný, pojďte si něco vybrat!
 
 {else}
     <table class="table table-hover">
-
+        <tr>
+            <th>Název produktu</th>
+            <th>Počet kusů</th>
+            <th>Velikost</th>
+            <th>Cena</th>
+        </tr>
         {foreach $cart->items as $item}
-            <tr>
-                <th>Název produktu</th>
-                <th>Počet kusů</th>
-                <th>Velikost</th>
-            </tr>
+
             <tr>
                 <td>{$item->product->title}</td>
                 <td>{$item->count}</td>
                 <td>{$item->size}</td>
+                <td>{$item->product->price} Kč</td>
                 <td>
-                    <a href="{link remove! $item->cartItemId}">odebrat</a>
+                    <a href="{link remove! $item->cartItemId}" class="ajax">odebrat</a>
                 </td>
             </tr>
-
-
         {/foreach}
+        <tr>
+            <th>Cena celkem</th>
+            <td></td>
+            <td></td>
+            <th>{$cart->getTotalPrice()} Kč</th>
+        </tr>
 
     </table>
 
-
+    <a href="{plink :Front:Cart:nahled }"><button class="btn btn-primary mb-2 type="submit">Shrnutí</button></a>
 {/if}
+
+</div>

@@ -25,6 +25,7 @@
         <div class="container">
             <div class="row">
             {foreach $products as $product}
+                {if $product->available == 1}
                 <a href="{plink Product:show url=>$product->url, page=>1}" class="h4">
                 <div class="m-3">
                     <div class="card text-center" style="width: 15.1rem; height: 30rem;">
@@ -39,6 +40,7 @@
                     </div>
                 </div>
                 </a>
+                {/if}
             {/foreach}
             </div>
         </div>

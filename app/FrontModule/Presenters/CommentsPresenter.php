@@ -38,7 +38,7 @@ class CommentsPresenter extends BasePresenter{
         }
 
         if ($this->commentsFacade->deleteComment($comments)){
-            $this->flashMessage('Komentář byl smazána.', 'info');
+            $this->flashMessage('Komentář byl smazán.', 'info');
         }else{
             $this->flashMessage('Tento komentář není možné smazat.', 'error');
         }
