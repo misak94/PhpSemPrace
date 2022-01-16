@@ -9,7 +9,7 @@
 {/block script}
 
         <h1 n:block="title" style=" text-align: center">Nabízené produkty</h1>
-           <ul class="nav nav-pills nav-fill m-5">
+           <ul class="nav nav-pills nav-fill mt-4 mb-2">
                <li class="nav-item">
                   <a class="nav-link {if !$activeCategory}active{/if}" href="{plink list category=>null,page=>1}">Všechny kategorie</a>
                </li>
@@ -19,15 +19,15 @@
                </li>
             {/foreach}
             </ul>
-
+<hr>
 
 
         <div class="container">
             <div class="row">
             {foreach $products as $product}
                 <a href="{plink Product:show url=>$product->url, page=>1}" class="h4">
-                <div class="col-md-3">
-                    <div class="card text-center" style="width: 15rem;">
+                <div class="m-3">
+                    <div class="card text-center" style="width: 15.1rem; height: 30rem;">
                         <img src="{$basePath}/img/products/{$product->productId}.{$product->photoExtension}" class="card-img-top" style="height: 220px;"">
                         <div class="card-body">
                             <h4>{$product->title}</h4>
