@@ -33,7 +33,7 @@ class ObjednavkaFacade
      * @return Objednavka
      * @throws \Exception
      */
-    public function getObjednavka(int $id):Objednavka {
+    public function getObjednavka(int $id) {
         return $this->objednavkaRepository->find($id); //buď počítáme s možností vyhození výjimky, nebo ji ošetříme už tady a můžeme vracet např. null
     }
 

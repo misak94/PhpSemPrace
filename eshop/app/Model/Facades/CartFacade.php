@@ -76,6 +76,10 @@ class CartFacade{
         $this->cartItemRepository->persist($cartItem);
     }
 
+    public function saveCartItemId(CartItem $cartItem){
+        $this->cartItemRepository->persist($cartItem);
+    }
+
     /**
      * Metoda pro smazání položky košíku
      * @param CartItem $cartItem

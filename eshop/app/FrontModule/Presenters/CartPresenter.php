@@ -7,6 +7,7 @@ use App\Model\Facades\CartFacade;
 use App\Model\Facades\ObjednavkaFacade;
 use App\Model\Facades\ObjednavkaIdFacade;
 use App\Model\Facades\UsersFacade;
+use App\Model\Repositories\CartItemRepository;
 use App\Model\Repositories\ObjednavkaIdRepository;
 use Nette\Application\UI\Form;
 use Nette\Utils\Random;
@@ -19,8 +20,8 @@ class CartPresenter extends BasePresenter
     private $usersFacade;
     /** @var ObjednavkaFacade $objednavkaFacade*/
     private $objednavkaFacade;
-    /** @var ObjednavkaIdFacade $objednavkaIdFacade*/
-    private $objednavkaIdFacade;
+    /** @var CartItemRepository $cartItemRepository*/
+    private $cartItemRepository;
 
 
     /** @persistent */
@@ -68,12 +69,7 @@ class CartPresenter extends BasePresenter
     //Metoda pro uložení komentáře
     public function commentFormSucceeded(\stdClass $values/*,string $url*/): void
     {
-        /*$cart=$this->cartFacade->getCartByUser($this->usersFacade->getUser($this->user->id));
-        foreach ($cart->items as $item){
-            $cartItem = $cartItem;
-            $cartItem->objednavka = (int)$values->objednavkaId;
-            $this->Item
-        }*/
+
         //$objednavkaId = $this->objednavkaIdFacade->getId(1);
        $objednavka = new Objednavka();
        $objednavka->jmeno = $values->jmeno;
@@ -82,7 +78,14 @@ class CartPresenter extends BasePresenter
        $objednavka->zprava =$values->zprava;
        $objednavka->user = $this->usersFacade->getUser($this->user->id);
        $objednavka->cena = (int)$this->cartFacade->getCartByUser($this->usersFacade->getUser($this->user->id))->getTotalPrice();
-       $this->objednavkaFacade->saveObjednavka($objednavka);
+        $cart=$this->cartFacade->getCartByUser($this->usersFacade->getUser($this->user->id));
+        $this->objednavkaFacade->saveObjednavka($objednavka);
+        foreach ($cart->items as $item){
+            $cartItem = $item;
+            $cartItem->objednavka = $this->objednavkaFacade->getObjednavka((int)$values->objednavkaId);
+            $this->cartFacade->saveCartItemId($cartItem);
+        }
+       //$this->objednavkaFacade->saveObjednavka($objednavka);
 
 
     }
@@ -101,8 +104,8 @@ class CartPresenter extends BasePresenter
     public  function injectObjednavkaFacade(ObjednavkaFacade $objednavkaFacade){
         $this->objednavkaFacade = $objednavkaFacade;
     }
-    public function injectObjednavkaIdFacade(ObjednavkaIdFacade $objednavkaIdFacade){
-        $this->objednavkaIdFacade = $objednavkaIdFacade;
+    public function injectCartItemRepository(CartItemRepository $cartItemRepository){
+        $this->cartItemRepository = $cartItemRepository;
 
     }
 }
