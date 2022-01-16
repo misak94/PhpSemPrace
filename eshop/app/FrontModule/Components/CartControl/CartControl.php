@@ -6,6 +6,7 @@ use App\Model\Entities\Cart;
 use App\Model\Entities\CartItem;
 use App\Model\Entities\Product;
 use App\Model\Facades\CartFacade;
+use App\Model\Facades\ObjednavkaFacade;
 use Nette\Application\UI\Control;
 use Nette\Application\UI\Template;
 use Nette\Http\Session;
@@ -25,6 +26,8 @@ class CartControl extends Control{
     private $cartSession;
     /** @var Cart $cart */
     private $cart;
+    /** @var Objednavka $objednavka */
+    private $objednavkaFacade;
 
     /**
      * Akce renderující šablonu s odkazem pro zobrazení harmonogramu na desktopu
@@ -80,6 +83,9 @@ class CartControl extends Control{
             $cartItem = new CartItem();
             $cartItem->cart=$this->cart;
             $cartItem->product = $product;
+            $cartItem->objednavka = $this->objednavkaFacade->findObjednavka(1);
+            $cartItem->size = $size;
+
         }
 
         $cartItem->count = $count;
@@ -100,9 +106,10 @@ class CartControl extends Control{
      * @param Session $session
      * @param CartFacade $cartFacade
      */
-    public function __construct(Security\User $user, Session $session, CartFacade $cartFacade){
+    public function __construct(Security\User $user, Session $session, CartFacade $cartFacade, ObjednavkaFacade $objednavkaFacade){
         $this->user=$user;
         $this->cartFacade=$cartFacade;
+        $this->objednavkaFacade = $objednavkaFacade;
         $this->cartSession=$session->getSection('cart');
         $this->cart=$this->prepareCart();
     }

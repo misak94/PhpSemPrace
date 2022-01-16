@@ -23,12 +23,8 @@
 		<div class="container">
 			<h1 class="h2 mt-1 "><a href="{plink Homepage:default}" class="text-dark">E-shop</a></h1>
 			<div class="ml-auto">
-			{if $user->isAllowed('Admin:Users','default')}<a href="{plink :Admin:Dashboard:default}">Administrátorské rozhraní</a>{/if}
 				{control cart}
 				{control userLogin}
-            <a class="nav-link" href="{plink :Front:Objednavka:list}">Eshop</a>
-
-
 
 			</div>
 		</div>

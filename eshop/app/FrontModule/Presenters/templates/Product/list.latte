@@ -3,114 +3,58 @@
 {varType App\Model\Entities\Category[]|null $activeCategories}
 {varType Nette\Utils\Paginator $paginator}
 
-
-
-
 {block content}
 {block script}
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
- <link rel="stylesheet"  href="{$basePath}/styly/NahledProduktu.css">
- <link rel="stylesheet"  href="{$basePath}/styly/sideMenu.css">
- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Open+Sans">
- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
- <script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
- <script src="{$basePath}/script/sidebar-menu.js"></script>
-
+ <link rel="stylesheet"  href="{$basePath}/styly/">
 {/block script}
-<style>
-.container{
-    margin: 0px;
-}
-
-                .flex-container {
-                  padding: 20;
-                  margin: 0;
-                  list-style: none;
-                  border: 1px solid silver;
-                  -ms-box-orient: horizontal;
-                  display: -webkit-box;
-                  display: -moz-box;
-                  display: -ms-flexbox;
-                  display: -moz-flex;
-                  display: -webkit-flex;
-                  display: flex;
-                }
-                .wrap    {
-                  -webkit-flex-wrap: wrap;
-                  flex-wrap: wrap;
-                }
-                #horizontal-list{
-                    list-style: none outside none; margin:0; padding: 0; text-align: center; }
-
-            </style>
-
-
-
-
 
         <h1 n:block="title" style=" text-align: center">Nabízené produkty</h1>
-        <div   style="display:flex" style="margin: 0px">
-            <div style="margin-right:30px">
-
-                        <ul class="sidebar-menu">
-                            <li class="sidebar-header">Kategorie produktů</li>
-                            <li class="nav-item">
-                                <a class="nav-link {if !$activeCategory}active{/if}" href="{plink list category=>null,page=>1}">Všechny kategorie</a>
-                            </li>
-                            {foreach $categories as $category}
-                                <li class="nav-link {if $activeCategory && ($category->categoryId==$activeCategory->categoryId)}active{/if}">
-                                <a class="nav-link {if $activeCategory && ($category->categoryId==$activeCategory->categoryId)}active{/if}" href="{plink list category=>$category->categoryId,page=>1}">{$category->title}</a>
-                                </li>
-                            {/foreach}
-                        </ul>
+           <ul class="nav nav-pills nav-fill mt-4 mb-2">
+               <li class="nav-item">
+                  <a class="nav-link {if !$activeCategory}active{/if}" href="{plink list category=>null,page=>1}">Všechny kategorie</a>
+               </li>
+            {foreach $categories as $category}
+               <li class="nav-item {if $activeCategory && ($category->categoryId==$activeCategory->categoryId)}active{/if}">
+                  <a class="nav-link {if $activeCategory && ($category->categoryId==$activeCategory->categoryId)}active{/if}" href="{plink list category=>$category->categoryId,page=>1}">{$category->title}</a>
+               </li>
+            {/foreach}
+            </ul>
+<hr>
 
 
-            </div>
-
-
-
-           <div>
-
-                <div class="flex-container wrap" style="flex-wrap:wrap" >
-                {foreach $products as $product}
-
-                    <a href="{plink Product:show url=>$product->url, page=>1}" class="h4">
-                        <div class="thumb-wrapper">
-
-                                    <div class="img-box">
-                                        <img src="{$basePath}/img/products/{$product->url}.{$product->photoExtension}" width="200" height="200">
-                                    </div>
-                                    <div class="thumb-content">
-                                        <h4>{$product->title}</h4>
-
-                                            <p class="item-price">{$product->price}Kč</p>
-                                            <a href="{plink Product:show url=>$product->url, page=>1}" class="btn btn-primary">Podrobnosti o produktu</a>
-                                    </div>
-                               </div>
-                            </a>
-
-
-                {/foreach}
+        <div class="container">
+            <div class="row">
+            {foreach $products as $product}
+                <a href="{plink Product:show url=>$product->url, page=>1}" class="h4">
+                <div class="m-3">
+                    <div class="card text-center" style="width: 15.1rem; height: 30rem;">
+                        <img src="{$basePath}/img/products/{$product->productId}.{$product->photoExtension}" class="card-img-top" style="height: 220px;"">
+                        <div class="card-body">
+                            <h4>{$product->title}</h4>
+                            <p class="item-price">{$product->price}Kč</p>
+                            {var $pocetKusu = ($product->thirtyeight+$product->thirtynine+$product->forty+$product->fortyone+$product->fortytwo+$product->fortythree+$product->fortyfour+$product->fortyfive)}
+                            <p  {if $pocetKusu<=0}class="text-danger"{/if}>{if $pocetKusu<=0}Produkt není dostupný{/if}{if $pocetKusu>0}Poček kusů: {$pocetKusu}{/if}</p>
+                            {if $pocetKusu>0}<a href="{plink Product:show url=>$product->url, page=>1}" class="btn btn-primary">Přejít na detail</a>{/if}
+                        </div>
+                    </div>
                 </div>
-           </div>
+                </a>
+            {/foreach}
+            </div>
         </div>
 
 
-        {if $paginator->pageCount>1}
-                <div style="text-align:center" style="height:58px">
-                <ul  class="paginator" style="font-size:11px">
-                    {for $i=1;$i<=$paginator->pageCount;$i++}
-                        <li style="display:inline-block" class="page-item {if $paginator->page == $i}active{/if}">
-                            <a class="page-link" href="{plink this page=>$i}">{$i}</a>
-
-                        </li>
-                    {/for}
+            {if $paginator->pageCount>1}
+            <nav aria-label="Page navigation">
+                <ul class="pagination justify-content-center mt-2">
+                {for $i=1;$i<=$paginator->pageCount;$i++}
+                    <li class="page-item {if $paginator->page == $i}active{/if}">
+                        <a class="page-link" href="{plink this page=>$i}">{$i}</a>
+                    </li>
+                {/for}
                 </ul>
-                </div>
-
-        {/if}
+            </nav>
+            {/if}
 
 
 

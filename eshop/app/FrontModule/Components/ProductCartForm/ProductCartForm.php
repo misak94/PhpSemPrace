@@ -3,7 +3,6 @@
 namespace App\FrontModule\Components\ProductCartForm;
 
 use App\FrontModule\Components\CartControl\CartControl;
-use http\Client\Curl\User;
 use Nette;
 use Nette\Application\UI\Form;
 use Nette\Forms\Controls\SubmitButton;
@@ -51,9 +50,8 @@ class ProductCartForm extends Form{
 
     $this->addSubmit('ok','přidat do košíku')
       ->onClick[]=function(SubmitButton $button){
-        if($this->cartControl->user->loggedIn){
-            $this->cartControl->cartFacade->getCartByUser($this->cartControl->uset);
-        }
+        //přidání zboží do košíku
+        //TODO
       };
   }
 

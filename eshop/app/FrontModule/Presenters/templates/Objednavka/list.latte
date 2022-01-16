@@ -1,0 +1,24 @@
+{block content}
+
+
+
+    <h1>Vaše objednávky</h1>
+<table class="table table-hover">
+    <tr>
+        <th>číslo objednácky</th>
+        <th>cena</th>
+    </tr>
+    {foreach $objednavka as $objednavka}
+
+        {if $user->identity->id == $objednavka->user->userId}
+             <tr>
+                <td>{$objednavka->objednavkaId}</td>
+                <td>c</td>
+                 <td>
+                     <a href="{plink detail $objednavka->objednavkaId}" class="btn btn-sm btn-outline-danger" >podrobnosti</a>
+                 </td>
+             </tr>
+        {/if}
+    {/foreach}
+
+</table>

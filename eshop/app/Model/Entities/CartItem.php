@@ -14,6 +14,7 @@ use LeanMapper\Entity;
  * @property Cart $cart m:hasOne
  * @property int $count = 0
  * @property int $size
+ * @property Objednavka $objednavka m:hasOne
  */
 class CartItem extends Entity{
 

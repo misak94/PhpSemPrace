@@ -1,13 +1,6 @@
-{varType App\Model\Entities\Cart $cart}
+{block content}
 
-<div n:snippet="list" data-naja-snippet-cache="off">
-
-<h1>Váš košík</div>
-    {if empty($cart->items)}
-        košík je prázdný
-
-    {else}
-        <table class="table table-hover">
+<table class="table table-hover">
                 <tr>
                     <th>Název produktu</th>
                     <th>Počet kusů</th>
@@ -21,9 +14,6 @@
                     <td>{$item->count}</td>
                     <td>{$item->size}</td>
                     <td>{$item->product->price} Kč</td>
-                    <td>
-                        <a href="{link remove! $item->cartItemId}" class="ajax">odebrat</a>
-                    </td>
                 </tr>
             {/foreach}
             <tr>
@@ -34,8 +24,6 @@
             </tr>
 
         </table>
+{control objednavkaForm}
 
 
-    {/if}
-<a href="{plink :Front:Cart:nahled }"><button class="btn btn-primary mb-2 type="submit">Shrnutí</button></a>
-</div>
