@@ -10,7 +10,8 @@
     <tr>
         <th>Jméno produktu</th>
         <th>cena</th>
-        <th>počet kusů<th>
+        <th>počet kusů</th>
+        <th>velikost</th>
     </tr>
     {foreach $objednavka->cartItems as $cartItem}
 
@@ -18,6 +19,7 @@
             <td>{$cartItem->product->title}</td>
             <td>{$cartItem->product->price}</td>
             <td>{$cartItem->count}</td>
+            <th>{$cartItem->size}</th>
         </tr>
 
     {/foreach}
@@ -25,7 +27,7 @@
 </table>
 
 <ul>
-    <li><a href="{plink odeslat! $objednavka->objednavkaId}">Změnit stav objednávky na odesláno</a></li>
-    <li><a href="{plink zrusit! $objednavka->objednavkaId}">Změnit stav objednávky na zrušeno</a></li>
-    <li><a href="{plink prijato! $objednavka->objednavkaId}">Změnit stav objednávky na přijato</a></li>
+    {if $objednavka->stav != "odesláno"}<li><a href="{plink odeslat! $objednavka->objednavkaId}">Změnit stav objednávky na odesláno</a></li>{/if}
+    {if $objednavka->stav != "zrušeno"}<li><a href="{plink zrusit! $objednavka->objednavkaId}">Změnit stav objednávky na zrušeno</a></li>{/if}
+    {if $objednavka->stav != "přijato"}<li><a href="{plink prijato! $objednavka->objednavkaId}">Změnit stav objednávky na přijato</a></li>{/if}
 <ul>

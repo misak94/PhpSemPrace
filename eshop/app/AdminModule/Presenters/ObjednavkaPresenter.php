@@ -25,8 +25,12 @@ class ObjednavkaPresenter extends BasePresenter
 {
     /**@var ObjednavkaFacade $objednavkaFacade */
     private $objednavkaFacade;
+
+    /**@var UserFacade $userFacade */
+    private $userFacade;
     /** @var ObjednavkaEditFormFactory $objednavkaEditFormFactory */
     private $objednavkaEditFormFactory;
+
 
     public $objednavkaId;
 
@@ -44,29 +48,13 @@ class ObjednavkaPresenter extends BasePresenter
      * Formulář na editaci objednávek
      * @return ObjednavkaEditForm
      */
-    public function createComponentObjednavkaEditForm(string $objednavkaId)/*:ObjednavkaEditForm*/ {
-        /*$form = $this->objednavkaEditFormFactory->create();
-        $form->onCancel[]=function(){
-            $this->redirect('list');
-        };
-        $form->onFinished[]=function($message=null){
-            if (!empty($message)){
-                $this->flashMessage($message);
-            }
-            $this->redirect('list');
-        };
-        $form->onFailed[]=function($message=null){
-            if (!empty($message)){
-                $this->flashMessage($message,'error');
-            }
-            $this->redirect('list');
-        };
-        return $form;*/
-        return new form();
-    }
 
     public function handleOdeslat($id){
-
+        $user = $this->userFacade->getUser($this->user->identity->id);
+        if($user->role->roleId !="admin"){
+            $this->flashMessage('Nejsi admin', 'error');
+            return;
+        }
     $objednavka = $this->objednavkaFacade->getObjednavka($id);
     $objednavka->stav = "odesláno";
     $this->objednavkaFacade->saveObjednavka($objednavka);
@@ -75,7 +63,11 @@ class ObjednavkaPresenter extends BasePresenter
 }
 
     public function handleZrusit($id){
-
+        $user = $this->userFacade->getUser($this->user->identity->id);
+        if($user->role->roleId !="admin"){
+            $this->flashMessage('Nejsi admin', 'error');
+            return;
+        }
         $objednavka = $this->objednavkaFacade->getObjednavka($id);
         $objednavka->stav = "zrušeno";
         $this->objednavkaFacade->saveObjednavka($objednavka);
@@ -84,7 +76,11 @@ class ObjednavkaPresenter extends BasePresenter
     }
 
     public function handlePrijato($id){
-
+        $user = $this->userFacade->getUser($this->user->identity->id);
+        if($user->role->roleId !="admin"){
+            $this->flashMessage('Nejsi admin', 'error');
+            return;
+        }
         $objednavka = $this->objednavkaFacade->getObjednavka($id);
         $objednavka->stav = "přijato";
         $this->objednavkaFacade->saveObjednavka($objednavka);
@@ -112,9 +108,15 @@ class ObjednavkaPresenter extends BasePresenter
         $this->objednavkaFacade = $objednavkaFacade;
     }
 
+    public function injectUserFacade(UsersFacade  $userFacade){
+        $this->userFacade = $userFacade;
+    }
+
     public function injectObjednavkaEditFormFactory(ObjednavkaEditFormFactory $objednavkaEditFormFactory){
         $this->objednavkaEditFormFactory=$objednavkaEditFormFactory;
     }
+
+
 
 
 }

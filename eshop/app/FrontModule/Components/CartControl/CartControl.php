@@ -73,9 +73,12 @@ class CartControl extends Control{
         if (!empty($this->cart->items)){
             foreach ($this->cart->items as $item){
                 if ($item->product->productId == $product->productId){
-                    $cartItem=$item;
-                    break;
+                    if ($item->size == $size){
+                        $cartItem=$item;
+                        break;
+                    }
                 }
+
             }
         }
 
