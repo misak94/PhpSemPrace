@@ -10,7 +10,8 @@
     <tr>
         <th>Jméno produktu</th>
         <th>cena</th>
-        <th>počet kusů<th>
+        <th>počet kusů</th>
+        <th>velikost</th>
     </tr>
     {foreach $objednavka->cartItems as $cartItem}
 
@@ -18,8 +19,31 @@
             <td>{$cartItem->product->title}</td>
             <td>{$cartItem->product->price}</td>
             <td>{$cartItem->count}</td>
+            <th>{$cartItem->size}</th>
         </tr>
 
     {/foreach}
 
 </table>
+
+{switch $objednavka->stav}
+    {case "přijato"}
+    <h4 class="mb-3">Změna stavu objednávky:</h4>
+    <a class="text-white" href="{plink odeslat! $objednavka->objednavkaId}">
+        <button type="button" class="btn btn-success">odesláno</button>
+    </a>
+    <a class="text-white" href="{plink zrusit! $objednavka->objednavkaId}">
+        <button type="button" class="btn btn-danger">zrušeno</button>
+    </a>
+    {case "odesláno"}
+    <h4 class="mb-3">Změna stavu objednávky:</h4>
+    <a class="text-dark" href="{plink vraceno! $objednavka->objednavkaId}">
+        <button type="button" class="btn btn-warning">vráceno</button>
+    </a>
+    {case "zrušeno"}
+    Objednávka byla zrušena.
+    {case "vráceno"}
+    Objednávka byla vrácena.
+{/switch}
+
+

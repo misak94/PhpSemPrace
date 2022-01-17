@@ -1,8 +1,11 @@
 <?php
 
-namespace App\FrontModule\Presenters;
+namespace App\AdminModule\Presenters;
 
+use App\AdminModule\Components\ObjednavkaEditForm\ObjednavkaEditForm;
+use App\AdminModule\Components\ObjednavkaEditForm\ObjednavkaEditFormFactory;
 use App\Model\Facades\ObjednavkaFacade;
+use App\Model\Facades\UserFacade;
 use App\Bootstrap;
 use App\FrontModule\Components\ProductCartForm\ProductCartForm;
 use App\FrontModule\Components\ProductCartForm\ProductCartFormFactory;
@@ -23,6 +26,15 @@ class ObjednavkaPresenter extends BasePresenter
 {
     /**@var ObjednavkaFacade $objednavkaFacade */
     private $objednavkaFacade;
+
+    /**@var UserFacade $userFacade */
+    private $userFacade;
+    /** @var ObjednavkaEditFormFactory $objednavkaEditFormFactory */
+    private $objednavkaEditFormFactory;
+
+
+    public $objednavkaId;
+
     public function renderList():void {
         $this->template->objednavka = $this->objednavkaFacade->findObjednavkas(['order'=>'created DESC']);
 
@@ -33,10 +45,108 @@ class ObjednavkaPresenter extends BasePresenter
         $this->template->objednavka = $this->objednavkaFacade->findObjednavka($objednavkaId);
     }
 
+    /**
+     * Formulář na editaci objednávek
+     * @return ObjednavkaEditForm
+     */
+
+    public function handleOdeslat($id){
+        $user = $this->userFacade->getUser($this->user->identity->id);
+        if($user->role->roleId !="admin"){
+            $this->flashMessage('Nejsi admin', 'error');
+            return;
+        }
+        $objednavka = $this->objednavkaFacade->getObjednavka($id);
+        if($objednavka->stav == "zrušeno"){
+            $this->flashMessage('Nejde odeslat zrušenou objednávku', 'error');
+            return;
+        }
+        $objednavka->stav = "odesláno";
+        $this->objednavkaFacade->saveObjednavka($objednavka);
+        $this->flashMessage('Stav objednávky změněn na odesláno', 'success');
+
+    }
+
+    public function handleZrusit($id){
+        $user = $this->userFacade->getUser($this->user->identity->id);
+        if($user->role->roleId !="admin"){
+            $this->flashMessage('Nejsi admin', 'error');
+            return;
+        }
+        $objednavka = $this->objednavkaFacade->getObjednavka($id);
+        if($objednavka->stav == "odesláno"){
+            $this->flashMessage('Nejde zrušit odeslanou objednávku', 'error');
+            return;
+        }
+        $objednavka->stav = "zrušeno";
+        $this->objednavkaFacade->saveObjednavka($objednavka);
+        $this->flashMessage('Stav objednávky změněn na zrušeno', 'success');
+
+    }
+
+    public function handlePrijato($id){
+        $user = $this->userFacade->getUser($this->user->identity->id);
+        if($user->role->roleId !="admin"){
+            $this->flashMessage('Nejsi admin', 'error');
+            return;
+        }
+        $objednavka = $this->objednavkaFacade->getObjednavka($id);
+        if($objednavka->stav == "přijato"){
+            $this->flashMessage('Nejde znovu příjmout přijatou objednávku', 'error');
+            return;
+        }
+        $objednavka->stav = "přijato";
+        $this->objednavkaFacade->saveObjednavka($objednavka);
+        $this->flashMessage('Stav objednávky změněn na přijato', 'success');
+
+    }
+
+    public function handleVraceno($id){
+        $user = $this->userFacade->getUser($this->user->identity->id);
+        if($user->role->roleId !="admin"){
+            $this->flashMessage('Nejsi admin', 'error');
+            return;
+        }
+        $objednavka = $this->objednavkaFacade->getObjednavka($id);
+        if($objednavka->stav != "odesláno"){
+            $this->flashMessage('Nejde vrátit neodeslanou objednávku', 'error');
+            return;
+        }
+        $objednavka->stav = "vráceno";
+        $this->objednavkaFacade->saveObjednavka($objednavka);
+        $this->flashMessage('Stav objednávky změněn na vrácena', 'success');
+
+    }
+
+    //Metoda pro uložení komentáře
+    public function commentFormSucceeded(\stdClass $values/*,string $url*/): void
+    {
+        /* $comment = new Comments();
+         $comment->product = $this->productsFacade->getProduct($values->productId);
+         $comment->name = $this->user->identity->name;
+         $comment->content = $values->content;
+         //$comment->created = date("Y.m.d H:i");
+         $this->commentsFacade->saveComment($comment);
+         $this->flashMessage('Děkuji za komentář', 'success');
+         $this->redirect('this');*/
+    }
+
+
+
 
     public function injectObjednavkaFacade(ObjednavkaFacade $objednavkaFacade){
         $this->objednavkaFacade = $objednavkaFacade;
     }
+
+    public function injectUserFacade(UsersFacade  $userFacade){
+        $this->userFacade = $userFacade;
+    }
+
+    public function injectObjednavkaEditFormFactory(ObjednavkaEditFormFactory $objednavkaEditFormFactory){
+        $this->objednavkaEditFormFactory=$objednavkaEditFormFactory;
+    }
+
+
 
 
 }
