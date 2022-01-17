@@ -6,7 +6,7 @@ namespace App\Model\Facades;
 use App\Model\Repositories\ObjednavkaRepository;
 
 /**
- * Class CommentsFacade
+ * Class ObjednavkaFacade
  * @package App\Model\Facades
  */
 class ObjednavkaFacade
@@ -28,7 +28,7 @@ class ObjednavkaFacade
     }
 
     /**
-     * Metoda pro načtení jednoho komentáře
+     * Metoda pro načtení jedné objednávky
      * @param int $id
      * @return Objednavka
      * @throws \Exception
@@ -38,19 +38,19 @@ class ObjednavkaFacade
     }
 
     /**
-     * Metoda pro vyhledání kategorií
+     * Metoda pro vyhledání objednávek
      * @param array|null $params = null
      * @param int $offset = null
      * @param int $limit = null
-     * @return Comments[]
+     * @return Objednavka[]
      */
     public function findObjednavkas(array $params=null,int $offset=null,int $limit=null):array {
         return $this->objednavkaRepository->findAllBy($params,$offset,$limit);
     }
 
     /**
-     * Metoda pro smazání komentáře
-     * @param Comments $comment
+     * Metoda pro smazání objdnávky
+     * @param Objednavka $objednavka
      * @return bool
      */
     public function deleteObjednavka(Objednavka $objednavka):bool {

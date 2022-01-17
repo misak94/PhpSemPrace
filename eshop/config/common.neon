@@ -27,6 +27,7 @@ services:
 
 	- App\AdminModule\Components\CategoryEditForm\CategoryEditFormFactory
 	- App\AdminModule\Components\ProductEditForm\ProductEditFormFactory
+	- App\AdminModule\Components\ObjednavkaEditForm\ObjednavkaEditFormFactory
 
 	- App\FrontModule\Components\UserLoginForm\UserLoginFormFactory
 	- App\FrontModule\Components\UserRegistrationForm\UserRegistrationFormFactory
@@ -45,8 +46,8 @@ services:
 	- App\Model\Facades\LikedByFacade
 	- App\Model\Facades\CommentsFacade
 	- App\Model\Facades\CartFacade
-
-
+	- App\Model\Facades\ObjednavkaFacade
+	- App\Model\Facades\ObjednavkaIdFacade
 
 	- App\Model\Repositories\CategoryRepository
 	- App\Model\Repositories\ForgottenPasswordRepository
@@ -58,7 +59,6 @@ services:
 	- App\Model\Repositories\LikedByRepository
 	- App\Model\Repositories\CommentsRepository
 	- App\Model\Repositories\CartRepository
-	- App\Model\Repositories\CartItemRepository	
-	
-
-		
+	- App\Model\Repositories\CartItemRepository
+	- App\Model\Repositories\ObjednavkaIdRepository
+	- App\Model\Repositories\ObjednavkaRepository

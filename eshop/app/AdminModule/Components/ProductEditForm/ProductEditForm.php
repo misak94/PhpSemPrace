@@ -147,7 +147,7 @@ class ProductEditForm extends Form{
           ->setRequired('Musíte vědět kolik bot velikosti 45 máme!');//tady by mohly být další kontroly pro min, max atp.
 
 
-      $this->addCheckbox('available', 'Zobrazit:')
+      $this->addCheckbox('available', 'Zobrazovat v eshopu')
       ->setDefaultValue(true);
 
     #region obrázek

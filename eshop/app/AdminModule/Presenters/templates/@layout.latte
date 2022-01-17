@@ -42,6 +42,9 @@
 				<li n:class="$presenter->isLinkCurrent('Users:*')?active, nav-item" n:if="$user->isAllowed('Admin:Users','default')">
 					<a class="nav-link" href="{plink Users:default}">Uživatelé</a>
 				</li>
+				<li n:class="$presenter->isLinkCurrent('Objednavka:*')?active, nav-item" n:if="$user->isAllowed('Objednavka','default')">
+					<a class="nav-link" href="{plink Objednavka:list}">Objednávky</a>
+				</li>
 			</ul>
 
 			<ul class="navbar-nav ml-auto">

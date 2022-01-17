@@ -71,22 +71,26 @@ class CartPresenter extends BasePresenter
     {
 
         //$objednavkaId = $this->objednavkaIdFacade->getId(1);
-       $objednavka = new Objednavka();
-       $objednavka->jmeno = $values->jmeno;
-       $objednavka->email = $values->email;
-       $objednavka->objednavkaId=(int)$values->objednavkaId;
-       $objednavka->zprava =$values->zprava;
-       $objednavka->user = $this->usersFacade->getUser($this->user->id);
-       $objednavka->cena = (int)$this->cartFacade->getCartByUser($this->usersFacade->getUser($this->user->id))->getTotalPrice();
+        $objednavka = new Objednavka();
+        $objednavka->jmeno = $values->jmeno;
+        $objednavka->email = $values->email;
+        $objednavka->objednavkaId=(int)$values->objednavkaId;
+        $objednavka->zprava =$values->zprava;
+        $objednavka->stav = "přijato";
+        $objednavka->user = $this->usersFacade->getUser($this->user->id);
+        $objednavka->cena = (int)$this->cartFacade->getCartByUser($this->usersFacade->getUser($this->user->id))->getTotalPrice();
         $cart=$this->cartFacade->getCartByUser($this->usersFacade->getUser($this->user->id));
         $this->objednavkaFacade->saveObjednavka($objednavka);
         foreach ($cart->items as $item){
             $cartItem = $item;
             $cartItem->objednavka = $this->objednavkaFacade->getObjednavka((int)$values->objednavkaId);
+            $cartItem->cart = null;
             $this->cartFacade->saveCartItemId($cartItem);
+            $this->cartFacade->saveCartItemId($item);
         }
-       //$this->objednavkaFacade->saveObjednavka($objednavka);
-
+        //$this->objednavkaFacade->saveObjednavka($objednavka);
+        $this->flashMessage('Objednávka byla odeslána, děkujeme!', 'info');
+        $this->redirect('Product:list');
 
     }
 

@@ -5,6 +5,7 @@ namespace App\Model\Authorization;
 use App\Model\Entities\Category;
 use App\Model\Entities\Comments;
 use App\Model\Entities\User;
+use App\Model\Entities\Objednavka;
 use App\Model\Entities\Permission;
 use App\Model\Facades\UsersFacade;
 use Nette\Security\Role;
@@ -37,6 +38,10 @@ class Authorizator extends \Nette\Security\Permission {
             return $this->usersResourceIsAllowed($role, $resource, $privilege);
         }
 
+        if ($resource instanceof Objednavka){
+            return $this->usersResourceIsAllowed($role, $resource, $privilege);
+        }
+
         return parent::isAllowed($role, $resource, $privilege);
     }
 
@@ -65,6 +70,15 @@ class Authorizator extends \Nette\Security\Permission {
         }
         //když nebyl odchycen konkrétní stav, vrátíme výchozí hodnotu oprávnění (případně bychom se mohli ptát také na resource Front:Category či Admin:Category)
         return parent::isAllowed($role, 'Users', $privilege);
+    }
+
+    private function objednavkaResourceIsAllowed($role, Objednavka $resource, $privilege){
+        switch ($privilege){
+            case 'delete':
+                //TODO kontrola, jestli jsou v kategorii nějaké produkty - pokud ano, nesmažeme ji
+        }
+        //když nebyl odchycen konkrétní stav, vrátíme výchozí hodnotu oprávnění (případně bychom se mohli ptát také na resource Front:Category či Admin:Category)
+        return parent::isAllowed($role, 'Objednavka', $privilege);
     }
 
 

@@ -99,7 +99,7 @@ class UserPresenter extends BasePresenter{
       #endregion návrat z Facebooku
     }else{
       #region přesměrování na přihlášení pomocí Facebooku
-      $backlink = $this->link('//User:facebookLogin',['callback'=>true]);
+      $backlink = $this->link('//User:facebookLogin',['callback'=>true,'backlink'=>null]);
       $facebookLoginLink = $this->facebookApi->getLoginUrl($backlink);
       $this->redirectUrl($facebookLoginLink);
       #endregion přesměrování na přihlášení pomocí Facebooku
@@ -171,7 +171,7 @@ class UserPresenter extends BasePresenter{
       try{
         //po registraci uživatele rovnou i přihlásíme
         $this->user->login($values['email'],$values['password']);
-        $this->flashMessage('Vítejte v aplikaci nástěnky :)');
+        $this->flashMessage('Vítejte na našem eshopu! :)');
       }catch (\Exception $e){
         $this->flashMessage('Při registraci se vyskytla chyba','error');
       }

@@ -53,7 +53,12 @@
                     <h2 class="mt-2">
                         {$product->price},-</small>
                     </h2>
-                    {control "productCartForm-$product->productId"}
+                    {var $pocetKusu = ($product->thirtyeight+$product->thirtynine+$product->forty+$product->fortyone+$product->fortytwo+$product->fortythree+$product->fortyfour+$product->fortyfive)}
+                    {if $pocetKusu != 0}
+                        {control "productCartForm-$product->productId"}
+                    {else}
+                        <button type="button" class="btn btn-warning btn-lg btn-block">Litujeme, ale bota momentálně není skladem</button>
+                    {/if}
                     </h2>
                     <hr>
                     <h3 class="box-title mt-5">Podrobnosti o botě</h3>
@@ -100,7 +105,7 @@
 
 {if $logged}
 
-    <form n:name=commentForm class="form-inline p-3 bg-light" style="border: 1px solid #dee2e6 !important;">
+    <form n:name=commentForm class="form-inline p-3 mb-5 bg-light" style="border: 1px solid #dee2e6 !important;">
         <h4>Přidejte komentář:</h4>
         <div class="form-group mb-2">
             <label n:name=content><input n:name=content size=90></label>
@@ -109,36 +114,9 @@
     </form>
 {else}
 
-    <h3>Nový komentář mohou přidávat pouze přihlášení uživatelé</h3>
+    <h3 class="mb-5">Nový komentář mohou přidávat pouze přihlášení uživatelé</h3>
 
 {/if}
-
-
-            {foreach $product->comments as $comment}
-
-
-                         <!-- <ul class="list-inline d-sm-flex my-0">
-                            <li class="list-inline-item g-mr-20">
-                              <a  href="{plink like! id=>$comment->commentsId}" class="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover>
-                                <i class="fa fa-thumbs-up g-pos-rel g-top-1 g-mr-3"></i>
-                                {$comment->likes}
-                              </a>
-                            </li>
-                            <li class="list-inline-item g-mr-20">
-                              <a class="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover" href="#!">
-                                <i class="fa fa-thumbs-down g-pos-rel g-top-1 g-mr-3"></i>
-                                {$comment->dislikes}
-                              </a>
-                            </li>
-                            <li class="list-inline-item ml-auto">
-                              <a class="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover" href="#!">
-                                <i class="fa fa-reply g-pos-rel g-top-1 g-mr-3"></i>
-                                Reply
-                              </a>
-                            </li>
-                          </ul> -->
-
-            {/foreach}
 
 
 

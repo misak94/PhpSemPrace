@@ -1,19 +1,19 @@
 parameters:
     mailFrom:
-        email: 'veim01@vse.cz'
-        name: 'veim01 eshop'
+        email: 'blak05@vse.cz'
+        name: 'blak05 eshop'
 
     database:
         driver: mysqli
         host: localhost
         username: 
         password: 
-        database: veim01
+        database: blak05
         charset: utf8mb4
 
     facebook:
-        appId: ''
-        secret: ''
+        appId: '411552900689099'
+        secret: 'aad3ccd8e6dba8734f04c185f6bc4931'
 
 php:
 	date.timezone: Europe/Prague

@@ -8,6 +8,6 @@ namespace App\FrontModule\Components\CartControl;
  */
 interface CartControlFactory{
 
-    public function create():CartControl;
+  public function create():CartControl;
 
 }

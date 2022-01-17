@@ -83,7 +83,7 @@ class CartControl extends Control{
             $cartItem = new CartItem();
             $cartItem->cart=$this->cart;
             $cartItem->product = $product;
-            $cartItem->objednavka = $this->objednavkaFacade->findObjednavka(1);
+           // $cartItem->objednavka = $this->objednavkaFacade->findObjednavka(1);
             $cartItem->size = $size;
 
         }
