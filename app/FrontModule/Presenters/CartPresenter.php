@@ -85,7 +85,6 @@ class CartPresenter extends BasePresenter
             $cartItem = $item;
             $cartItem->objednavka = $this->objednavkaFacade->getObjednavka((int)$values->objednavkaId);
             $this->cartFacade->saveCartItemId($cartItem);
-            $this->cartFacade->deleteCartItem($this->cartFacade->getCartItem($cartItem->cartItemId));
         }
         //$this->objednavkaFacade->saveObjednavka($objednavka);
         $this->flashMessage('Objednávka byla odeslána, děkujeme!', 'info');
