@@ -6,7 +6,7 @@ namespace App\Model\Facades;
 use App\Model\Repositories\ObjednavkaRepository;
 
 /**
- * Class CommentsFacade
+ * Class ObjednavkaFacade
  * @package App\Model\Facades
  */
 class ObjednavkaFacade
@@ -28,7 +28,7 @@ class ObjednavkaFacade
     }
 
     /**
-     * Metoda pro načtení jednoho komentáře
+     * Metoda pro načtení jedné objednávky
      * @param int $id
      * @return Objednavka
      * @throws \Exception
@@ -49,7 +49,7 @@ class ObjednavkaFacade
     }
 
     /**
-     * Metoda pro smazání komentáře
+     * Metoda pro smazání objdnávky
      * @param Objednavka $objednavka
      * @return bool
      */
